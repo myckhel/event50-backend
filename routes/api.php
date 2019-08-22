@@ -37,3 +37,12 @@ Route::post('/send-notification/', function(Request $request){
     'success' => true
   ]);
 })->name('push.send');
+
+
+Route::post('login', 'API\UserController@login');
+
+Route::post('register', 'API\UserController@register');
+
+Route::group(['middleware' => 'auth:api'], function(){
+  Route::get('/attendances', 'HomeController@at')->name('at');
+});

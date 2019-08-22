@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
          Yajra\Datatables\DatatablesServiceProvider::class,
+         Laravel\Passport\PassportServiceProvider::class,
 
         /*
          * Application Service Providers...

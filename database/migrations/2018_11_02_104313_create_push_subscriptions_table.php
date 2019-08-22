@@ -21,10 +21,10 @@ class CreatePushSubscriptionsTable extends Migration
             $table->string('auth_token')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')
-                    ->references('id')
-                    ->on('users')
-                    ->onDelete('cascade');
+        });
+
+        Schema::table('push_subscriptions', function (Blueprint $table) {
+          $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

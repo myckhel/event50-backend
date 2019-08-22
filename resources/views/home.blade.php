@@ -87,7 +87,7 @@ function Event(props){
   return (
     <div className="card-contain text-center p-t-10">
       <h5 className="text-capitalize p-b-10">Will you attend the {props.event.name} on:</h5>
-      <p className="text-muted">{props.event.edate}?</p>
+      <p className="text-muted">{Date(props.event.edate)}?</p>
       <Timer id={props.timer.id} time=@{{days: slicer(2), hours: slicer(3), mins: slicer(4), secs: slicer(5)}} />
     </div>
   )
@@ -137,12 +137,12 @@ class Attendance extends React.Component {
       attendance : props.attendance,
       refresh: props.refresh
     }
-    console.log(this.state.refresh)
+    // console.log(this.state.refresh)
   }
 
   componentDidMount(){
     let id = this.state.attendance.id
-    this.counter(this.state.attendance.event_edate)
+    this.counter(this.state.attendance.edate)
   }
 
   componentWillUnmount(){
@@ -223,7 +223,7 @@ class Attendance extends React.Component {
         <div className="card-block">
           <Header name="{{ucwords($user->firstname.' '.$user->lastname)}}" />
           <Event timer=@{{id: this.state.attendance.id}}
-            event=@{{name: this.state.attendance.service.name, edate: this.state.attendance.event_edate}}
+            event=@{{name: this.state.attendance.service.name, edate: this.state.attendance.edate}}
           />
           <Marker refresh={this.state.refresh} id={this.state.attendance.id} mark={this.mark} />
         </div>
@@ -248,7 +248,9 @@ class App extends React.Component {
     $.ajax({url: "{{route('attendance.get')}}", type: 'GET', dataType: 'json', encode: true})
     .done((response) => {
       if (response.status) {
-        this.setState({attendance: response.pending_attendance})
+        this.setState({attendance: response.pending_attendance},
+        ()=>console.log(this.state) )
+        // console.log(this.state);
       }else{
 
       }

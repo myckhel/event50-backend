@@ -378,7 +378,7 @@
 				allowOutsideClick: false,
 			  showCancelButton: true,
 			},function(){
-				let values = {'event_sdate': sdate, 'event_edate': edate, '_token': '{{ csrf_token() }}'};
+				let values = {'sdate': sdate, 'edate': edate, '_token': '{{ csrf_token() }}'};
 				toggleAble('#create', true);
 			  	$.ajax(
 			  		{type: "POST", url: "{{route('event.create')}}", data: values, dataType: "json", encode: true}
